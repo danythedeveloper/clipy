@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="">
+      <div class="form-control">
+        <label for="addTodo">Enter Your Todo</label>
+        <input
+          id="addTodo"
+          name="addTodo"
+          form="addTodo"
+          autofocus
+          type="text"
+          name=""
+          id=""
+        />
+      </div>
+      <button type="submit">Add</button>
+    </form>
+    <script>
+      const todoInput = document.getElementById("addTodo");
+      document.querySelector("form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const inputValue = todoInput.value;
+        window.api.send("todo:submit", inputValue);
+      });
+    </script>
+  </body>
+</html>
