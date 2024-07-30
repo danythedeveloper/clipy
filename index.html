@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electron App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <script src="./components/clip.js"></script>
+    <div class="app">
+      <div class="app-header">
+        <h1>Clipy</h1>
+        <p class="author">By Daniel Moctezuma</p>
+      </div>
+      <div class="app-content"></div>
+    </div>
+
+    <script>
+      const appContent = document.querySelector(".app-content");
+
+      window.api.receive("clips:get", (clips) => {
+        //Show To dos...
+        appContent.innerHTML = ""; // Clear existing content
+        clips.forEach((clip) => {
+          const clipElement = createClipElement(clip);
+          appContent.prepend(clipElement);
+        });
+      });
+
+      // Event listener for clearing todos
+      window.api.receive("clips:clear", () => {
+        const appContent = document.querySelector(".app-content");
+        appContent.innerHTML = ""; // Clear the UI
+      });
+    </script>
+  </body>
+</html>
